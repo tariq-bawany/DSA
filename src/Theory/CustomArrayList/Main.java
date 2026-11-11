@@ -95,7 +95,7 @@ class SeqList {
     }
 
 
-    int remove(int index) {
+    void remove(int index) {
 //        check the validity of index, is it valid or not
         checkIndex(index);
 
@@ -108,7 +108,6 @@ class SeqList {
         }
 
         arraySize--;
-        return remove;
     }
 
     void add(int x) {
@@ -133,6 +132,15 @@ class SeqList {
             System.out.print(elements[i] + " ");
         }
         System.out.println();
+    }
+
+    void insertOrdered(int val){
+        int i =0;
+        while(i<arraySize && val>elements[i]){
+            i++;
+        }
+        insert(i,val);
+
     }
 }
 
