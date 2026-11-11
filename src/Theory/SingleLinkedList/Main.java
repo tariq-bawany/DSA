@@ -47,41 +47,44 @@ class SinglyLinkedList {
             temp = temp.next;
             pos++;
         }
-        return -1; // not found }
-
+        return -1; // not found
     }
 
     public void insertFirst(int info) {
-        Node temp = new Node(info); // 1
-        temp.next = head; // 2 new → old first
-        head = temp; // 3 head → new
+        Node newNode = new Node(info); // 1
+        newNode.next = head; // 2 new → old first
+        head = newNode; // 3 head → new
     }
 
     public void insertLast(int info) {
-        Node temp = new Node(info); // next = null
+        Node newNode = new Node(info); // next = null
         if (head == null) { // empty list
-            head = temp;
+            head = newNode;
             return;
         }
-        Node temp1 = head;
-        while (temp1.next != null) // find last
-            temp1 = temp1.next;
-        temp1.next = temp; // old last → new
+        Node temp = head;
+        while (temp.next != null) // find last
+            temp = temp.next;
+        temp.next = newNode; // old last → new
     }
 
 
     // n is 1-based; read it with sc.nextInt()
     public void insertAfter(int n, int info) {
-        Node temp1 = head;
-        for (int i = 1; i < n && temp1 != null; i++)
-            temp1 = temp1.next; // go to node n
-        if (temp1 == null) {
+        if (n < 1) {
+            System.out.println("Invalid node position");
+            return;
+        }
+        Node temp = head;
+        for (int i = 1; i < n && temp != null; i++)
+            temp = temp.next; // go to node n
+        if (temp == null) {
             System.out.println(n + " node does not exist");
             return;
         }
-        Node temp = new Node(info);
-        temp.next = temp1.next; // new → successor
-        temp1.next = temp; // node n → new
+        Node newNode = new Node(info);
+        newNode.next = temp.next; // new → successor
+        temp.next = newNode; // node n → new
     }
 
 
@@ -107,7 +110,7 @@ class SinglyLinkedList {
 
 
     public void deleteAt(int n) {
-        if (head == null) return;
+        if (head == null || n<1) return;
         if (n == 1) { // first node
             head = head.next;
             return;
